@@ -1,17 +1,22 @@
-import React from "react";
-import CountdownTimer from "./counter"
+import React, { useState, useEffect } from 'react';
+import CountdownTimer from './counter';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+function Home() {
+    const [seconds, setSeconds] = useState(3434); 
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-			<CountdownTimer/>
-		
-		</div>
-	);
-};
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSeconds(prevSeconds => prevSeconds + 1);
+        }, 1000);
+
+        return () => clearInterval(interval); 
+    }, []);
+
+    return (
+        <div>           
+            <CountdownTimer seconds={seconds} />
+        </div>
+    );
+}
 
 export default Home;
